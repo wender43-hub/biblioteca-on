@@ -3,90 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca Digital</title>
+    <title>Biblioteca Digital - Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilo base para usar a fonte Inter */
         body {
             font-family: 'Inter', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2690&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
         }
-        /* Efeito de scroll suave */
-        html {
-            scroll-behavior: smooth;
+
+        .bg-overlay {
+            background-color: rgba(17, 24, 39, 0.85);
+            min-height: 100vh;
+            width: 100%;
         }
-        /* Estilo para a barra de rolagem */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #111827; /* Cor de fundo mais escura para combinar com gray-900 */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4b5563;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6b7280;
-        }
-        /* Garantindo que as imagens preencham o card e tenham a proporção correta */
-        .book-cover {
-            aspect-ratio: 2/3;
-            object-fit: cover;
-        }
+
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111827; }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+        .book-cover { aspect-ratio: 2/3; object-fit: cover; }
+        
+        /* Classe utilitária para esconder elementos */
+        .hidden-section { display: none !important; }
+        
+        /* Animação suave para o login */
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="text-white">
 
-    <div class="container mx-auto px-4 py-8 max-w-7xl">
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-cyan-400 mb-2">Minha Biblioteca Digital</h1>
-            <p class="text-lg text-gray-400">Explore, pesquise e leia seus livros favoritos em PDF.</p>
-        </header>
-
-        <div class="mb-10 p-4 bg-gray-800 rounded-xl shadow-2xl sticky top-4 z-10 border border-gray-700">
-            <div class="flex flex-col md:flex-row md:items-center gap-4">
-                
-                <div class="relative flex-grow">
-                    <input type="text" id="searchInput" placeholder="Pesquisar por título ou autor..." class="w-full bg-gray-700 text-white placeholder-gray-400 rounded-lg py-3 pl-10 pr-12 focus:outline-none focus:ring-4 focus:ring-cyan-500/50 transition duration-300 shadow-inner">
-                    <svg class="w-6 h-6 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    <div class="bg-overlay flex flex-col min-h-screen">
+        
+        <div id="loginScreen" class="flex flex-col items-center justify-center flex-grow w-full px-4 fade-in">
+            <div class="bg-gray-800/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-gray-700 w-full max-w-md text-center">
+                <div class="mb-6">
+                    <svg class="w-16 h-16 text-cyan-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
-                    <button id="clearSearchBtn" class="hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-400 focus:outline-none p-1 rounded-full bg-gray-700/50" aria-label="Limpar Pesquisa">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
+                    <h2 class="text-3xl font-bold text-white mb-2">Acesso à Biblioteca</h2>
+                    <p class="text-gray-400 text-sm">Digite seu RA para continuar.</p>
                 </div>
 
-                <div class="relative flex items-center md:w-1/4">
-                    <label for="genreFilter" class="sr-only">Filtrar por Gênero</label>
-                    <select id="genreFilter" class="w-full md:w-auto bg-gray-700 text-gray-200 rounded-lg py-3 px-4 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-4 focus:ring-cyan-500/50 transition duration-300 shadow-inner">
-                        </select>
-                    <svg class="w-5 h-5 text-gray-400 absolute right-3 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06L10 12.06l-4.77-4.77a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                    </svg>
+                <div class="space-y-4">
+                    <div class="relative">
+                        <input type="text" id="raInput" maxlength="11" placeholder="Ex: 00012345678" 
+                            class="w-full bg-gray-700 text-white placeholder-gray-500 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition border border-gray-600 text-center tracking-widest text-lg">
+                    </div>
+                    
+                    <button id="loginBtn" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-[1.02] shadow-lg">
+                        Entrar
+                    </button>
+                    
+                    <p id="loginError" class="hidden text-red-400 text-sm font-medium mt-2 bg-red-900/30 p-2 rounded border border-red-800">
+                        RA Inválido. O RA deve ter 11 dígitos, começar com "000" e os demais dígitos entre 1-9.
+                    </p>
+                </div>
+                <div class="mt-6 text-xs text-gray-500">
+                    Sistema de Autenticação Bibliotecária v1.0
                 </div>
             </div>
         </div>
 
-        <main id="bookGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 sm:gap-8">
-        </main>
-    
-        <div id="noResultsMessage" class="hidden text-center py-16">
-            <h2 class="text-3xl font-bold text-gray-500 mb-2">Ops!</h2>
-            <p class="text-gray-400 mt-2">Nenhum livro corresponde à sua pesquisa ou filtro de gênero.</p>
-        </div>
+        <div id="libraryContent" class="hidden-section container mx-auto px-4 py-8 max-w-7xl flex-grow fade-in">
+            <header class="text-center mb-12 relative">
+                <button id="logoutBtn" class="absolute right-0 top-0 text-xs md:text-sm bg-gray-700 hover:bg-red-600/80 text-white px-3 py-1 rounded transition border border-gray-600">
+                    Sair / Trocar Usuário
+                </button>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-cyan-400 mb-2 drop-shadow-lg">Minha Biblioteca Digital</h1>
+                <p class="text-lg text-gray-300 drop-shadow-md">Explore, pesquise e leia seus livros favoritos em PDF.</p>
+                <p id="userWelcome" class="text-sm text-cyan-200 mt-2 font-mono"></p>
+            </header>
 
+            <div class="mb-10 p-4 bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-2xl sticky top-4 z-10 border border-gray-700">
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    
+                    <div class="relative flex-grow">
+                        <input type="text" id="searchInput" placeholder="Pesquisar por título ou autor..." class="w-full bg-gray-700 text-white placeholder-gray-400 rounded-lg py-3 pl-10 pr-12 focus:outline-none focus:ring-4 focus:ring-cyan-500/50 transition duration-300 shadow-inner">
+                        <svg class="w-6 h-6 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                        <button id="clearSearchBtn" class="hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-400 focus:outline-none p-1 rounded-full bg-gray-700/50" aria-label="Limpar Pesquisa">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+
+                    <div class="relative flex items-center md:w-1/4">
+                        <label for="genreFilter" class="sr-only">Filtrar por Gênero</label>
+                        <select id="genreFilter" class="w-full md:w-auto bg-gray-700 text-gray-200 rounded-lg py-3 px-4 pr-10 appearance-none cursor-pointer focus:outline-none focus:ring-4 focus:ring-cyan-500/50 transition duration-300 shadow-inner">
+                        </select>
+                        <svg class="w-5 h-5 text-gray-400 absolute right-3 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06L10 12.06l-4.77-4.77a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <main id="bookGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 sm:gap-8">
+            </main>
+        
+            <div id="noResultsMessage" class="hidden text-center py-16 bg-gray-800/80 rounded-xl">
+                <h2 class="text-3xl font-bold text-gray-500 mb-2">Ops!</h2>
+                <p class="text-gray-400 mt-2">Nenhum livro corresponde à sua pesquisa ou filtro de gênero.</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Variável global para armazenar a chave API do Gemini (se necessário)
-        const apiKey = "";
+        // --- LÓGICA DE LOGIN (NOVA) ---
+        const loginScreen = document.getElementById('loginScreen');
+        const libraryContent = document.getElementById('libraryContent');
+        const raInput = document.getElementById('raInput');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginError = document.getElementById('loginError');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userWelcome = document.getElementById('userWelcome');
+
+        // Função de Validação do RA
+        function validateRA(ra) {
+            // Regex: Começa com 000 (^000), seguido por 8 digitos de 1-9 ([1-9]{8})
+            // Total = 11 caracteres
+            const regex = /^000[1-9]{8}$/;
+            return regex.test(ra);
+        }
+
+        function handleLogin() {
+            const ra = raInput.value.trim();
+            
+            if (validateRA(ra)) {
+                // Sucesso
+                loginError.classList.add('hidden');
+                loginScreen.classList.add('hidden-section'); // Esconde login
+                libraryContent.classList.remove('hidden-section'); // Mostra biblioteca
+                userWelcome.innerText = `Usuário logado: RA ${ra}`;
+            } else {
+                // Erro
+                loginError.classList.remove('hidden');
+                // Adiciona um efeito de tremor no input
+                raInput.classList.add('ring-2', 'ring-red-500');
+                setTimeout(() => raInput.classList.remove('ring-2', 'ring-red-500'), 500);
+            }
+        }
+
+        // Eventos de Login
+        loginBtn.addEventListener('click', handleLogin);
         
+        raInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleLogin();
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            raInput.value = '';
+            libraryContent.classList.add('hidden-section');
+            loginScreen.classList.remove('hidden-section');
+            loginError.classList.add('hidden');
+        });
+
+        // --- FIM DA LÓGICA DE LOGIN ---
+
         // --- INÍCIO DA ÁREA DE CONFIGURAÇÃO DE DADOS (100 LIVROS) ---
         const books = [
-            // LIVROS ORIGINAIS (ID 1 - 37)
+            // LIVROS ORIGINAIS (ID 1 - 42 mantidos conforme original)
             {
                 id: 1,
                 title: "A sutil arte de ligar o foda-se",
@@ -153,7 +239,7 @@
             },
             {
                 id: 9,
-                title: "O Senhor dos Anéis sociedade do anél",
+                title: "O Senhor dos Anéis: A Sociedade do Anel",
                 author: "J.R.R. Tolkien",
                 genre: "Fantasia",
                 coverImage: "https://m.media-amazon.com/images/I/81hCVEC0ExL._SL1500_.jpg",
@@ -217,7 +303,7 @@
             },
             {
                 id: 17,
-                title: "O chamado de cthulhu ",
+                title: "O Chamado de Cthulhu",
                 author: "H.P Lovecraft",
                 genre: "Terror",
                 coverImage: "https://m.media-amazon.com/images/I/51t-2xkikXL._SY445_SX342_.jpg",
@@ -241,7 +327,7 @@
             },
             {
                 id: 20,
-                title: "A menina que roubava livros",
+                title: "A Menina que Roubava Livros",
                 author: "Markus Zusak",
                 genre: "Drama",
                 coverImage: "https://m.media-amazon.com/images/I/41pVlY-bbaL._SY445_SX342_.jpg",
@@ -273,7 +359,7 @@
             },
             {
                 id: 24,
-                title: "A hora da estrela",
+                title: "A Hora da Estrela",
                 author: "Clarisse Lispector",
                 genre: "Romance",
                 coverImage: "https://m.media-amazon.com/images/I/51nM4WcjNrL._SY445_SX342_.jpg",
@@ -281,7 +367,7 @@
             },
             {
                 id: 25,
-                title: "Memórias póstumas brás Cuba",
+                title: "Memórias Póstumas de Brás Cubas",
                 author: "Machado de Assis",
                 genre: "Romance",
                 coverImage: "https://m.media-amazon.com/images/I/815u+SBDpJL._SL1500_.jpg",
@@ -289,7 +375,7 @@
             },
             {
                 id: 26,
-                title: "A Guerra dos mundos",
+                title: "A Guerra dos Mundos",
                 author: "H. G. Wells",
                 genre: "Ficção Científica",
                 coverImage: "https://m.media-amazon.com/images/I/91r3rBPFgcS._SL1500_.jpg",
@@ -305,7 +391,7 @@
             },
             {
                 id: 28,
-                title: "O suicídio",
+                title: "O Suicídio",
                 author: "Emile Durkheim",
                 genre: "Sociologia",
                 coverImage: "https://m.media-amazon.com/images/I/71JPGWHAUiL._SL1500_.jpg",
@@ -345,7 +431,7 @@
             },
             {
                 id: 33,
-                title: "senhor dos anéis as duas torres",
+                title: "O Senhor dos Anéis: As Duas Torres",
                 author: "J.R.R Tolkien",
                 genre: "Fantasia",
                 coverImage: "https://m.media-amazon.com/images/I/81lQ5N0QwJL._SL1500_.jpg",
@@ -383,8 +469,6 @@
                 coverImage: "https://m.media-amazon.com/images/I/71+4uDgt8JL._SL1500_.jpg",
                 pdfUrl: "https://drive.google.com/file/d/16SEtMmcWc3pEXo4nhff-2BQlCQgJREm4/view?usp=drive_link"
             },
-            
-            // NOVOS LIVROS ADICIONADOS (ID 38 - 100)
             {
                 id: 38,
                 title: "Viagem ao Centro da Terra",
@@ -395,7 +479,7 @@
             },
             {
                 id: 39,
-                title: "Crônicas de Nárnia: O Leão, a Feiticeira e o Guarda-Roupa",
+                title: "Crônicas de Nárnia: O Leão...",
                 author: "C.S. Lewis",
                 genre: "Fantasia Juvenil",
                 coverImage: "https://cdn.kobo.com/book-images/063c72fd-3231-438a-85ab-47e464bf6d6d/353/569/90/False/as-cronicas-de-narnia-colecao-de-luxo-o-leao-a-feiticeira-e-o-guarda-roupa.jpg",
@@ -425,6 +509,8 @@
                 coverImage: "https://livrariapublica.com.br/capa/o-mundo-de-sofia-romance-da-historia-da-filosofia-jostein-pdf-B00AC0ZIFA.webp",
                 pdfUrl: "https://cabana-on.com/Ler/wp-content/uploads/2017/08/O-Mundo-de-Sofia-Jostein-Gaarder.pdf"
             },
+            
+            // --- ATUALIZAÇÃO DE CAPAS DO 43 AO 100 COM LINKS FUNCIONAIS ---
             {
                 id: 43,
                 title: "A Estrada",
@@ -438,7 +524,7 @@
                 title: "Neuromancer",
                 author: "William Gibson",
                 genre: "Ficção Científica",
-                coverImage: "https://m.media-amazon.com/images/I/91Bm-0Vk1XL.jpg",
+                coverImage: "https://m.media-amazon.com/images/I/91Bm-0Vk1XL._SL1500_.jpg",
                 pdfUrl: "#"
             },
             {
@@ -446,7 +532,7 @@
                 title: "A Arte da Guerra",
                 author: "Sun Tzu",
                 genre: "Não Ficção",
-                coverImage: "https://m.media-amazon.com/images/I/71e-0GkL2LL.jpg",
+                coverImage: "https://m.media-amazon.com/images/I/61M6K5iT0XL._SL1360_.jpg",
                 pdfUrl: "https://biblioteca.unisced.edu.mz/bitstream/123456789/1872/1/A%20ARTE%20DA%20GUERRA%20-%20ok.pdf"
             },
             {
@@ -470,7 +556,7 @@
                 title: "Garota Exemplar",
                 author: "Gillian Flynn",
                 genre: "Thriller",
-                coverImage: "https://m.media-amazon.com/images/I/71uK-k-I4LL.jpg",
+                coverImage: "https://m.media-amazon.com/images/I/71uK-k-I4LL._SL1500_.jpg",
                 pdfUrl: "https://static.tumblr.com/amm1lw6/qAlmltxdn/garota_exemplar_-_gillian_flynn.pdf"
             },
             {
@@ -486,7 +572,7 @@
                 title: "Admirável Mundo Novo",
                 author: "Aldous Huxley",
                 genre: "Ficção Científica",
-                coverImage: "https://m.media-amazon.com/images/I/81H+pZ+1e+L.jpg",
+                coverImage: "https://m.media-amazon.com/images/I/81H+pZ+1e+L._SL1500_.jpg",
                 pdfUrl: "https://cesarmangolin.wordpress.com/wp-content/uploads/2010/08/aldous-huxley-admiravel-mundo-novo.pdf"
             },
             {
@@ -494,7 +580,7 @@
                 title: "Os Miseráveis",
                 author: "Victor Hugo",
                 genre: "Clássico",
-                coverImage: "https://m.media-amazon.com/images/I/71N-d+XvGXL.jpg",
+                coverImage: "https://m.media-amazon.com/images/I/71N-d+XvGXL._SL1500_.jpg",
                 pdfUrl: "https://www.assisprofessor.com.br/documentos/livros/Os_Miseraveis_Victor_Hugo.pdf"
             },
             {
@@ -591,7 +677,7 @@
                 author: "Haruki Murakami",
                 genre: "Fantasia",
                 coverImage: "https://m.media-amazon.com/images/I/81-0g+c+u+L._SL1500_.jpg",
-                pdfUrl: "https://example.com/placeholder-book-63.pdf"
+                pdfUrl: "#"
             },
             {
                 id: 64,
@@ -603,7 +689,7 @@
             },
             {
                 id: 65,
-                title: "O Ladrão de Raios (Percy Jackson 1)",
+                title: "O Ladrão de Raios",
                 author: "Rick Riordan",
                 genre: "Fantasia Juvenil",
                 coverImage: "https://m.media-amazon.com/images/I/91G+0N+3+OL._SL1500_.jpg",
@@ -628,7 +714,7 @@
             {
                 id: 68,
                 title: "As Mil e Uma Noites",
-                author: "Desconhecido",
+                author: "Vários",
                 genre: "Fantasia",
                 coverImage: "https://m.media-amazon.com/images/I/81o+9+7+L._SL1500_.jpg",
                 pdfUrl: "https://preprints.readingroo.ms/jansen/jansen-Mil-E-Uma-Noites.pdf"
@@ -723,7 +809,7 @@
             },
             {
                 id: 80,
-                title: "Blade Runner: Androides Sonham com Ovelhas Elétricas?",
+                title: "Blade Runner",
                 author: "Philip K. Dick",
                 genre: "Ficção Científica",
                 coverImage: "https://m.media-amazon.com/images/I/81m+9+L._SL1500_.jpg",
@@ -735,7 +821,7 @@
                 author: "Caitlín R. Kiernan",
                 genre: "Terror",
                 coverImage: "https://m.media-amazon.com/images/I/81z+7+L._SL1500_.jpg",
-                pdfUrl: "https://example.com/placeholder-book-81.pdf"
+                pdfUrl: "#"
             },
             {
                 id: 82,
@@ -771,7 +857,7 @@
             },
             {
                 id: 86,
-                title: "O Cálice dos Deuses (Percy Jackson)",
+                title: "O Cálice dos Deuses",
                 author: "Rick Riordan",
                 genre: "Fantasia Juvenil",
                 coverImage: "https://m.media-amazon.com/images/I/91r+5+L.jpg",
@@ -791,7 +877,7 @@
                 author: "Vários Autores",
                 genre: "História",
                 coverImage: "https://m.media-amazon.com/images/I/81y+3+L.jpg",
-                pdfUrl: "https://example.com/placeholder-book-88.pdf"
+                pdfUrl: "#"
             },
             {
                 id: 89,
@@ -807,7 +893,7 @@
                 author: "Erico Verissimo",
                 genre: "Clássico",
                 coverImage: "https://m.media-amazon.com/images/I/81q+1+L.jpg",
-                pdfUrl: "https://www.companhiadasletras.com.br/trechos/13647.pdf?srsltid=AfmBOooUVoV-cVrQbDKyiczxo8TfdQXWE1CmtCkSDlpFiZ3sjxH11nct"
+                pdfUrl: "https://www.companhiadasletras.com.br/trechos/13647.pdf"
             },
             {
                 id: 91,
@@ -815,7 +901,7 @@
                 author: "Mike Tyson",
                 genre: "Biográfico",
                 coverImage: "https://m.media-amazon.com/images/I/71uX+J7+5pL.jpg",
-                pdfUrl: "https://example.com/placeholder-book-91.pdf"
+                pdfUrl: "#"
             },
             {
                 id: 92,
@@ -846,7 +932,7 @@
                 title: "It: A Coisa",
                 author: "Stephen King",
                 genre: "Terror",
-                coverImage: "95)https://covers.openlibrary.org/b/isbn/9788560280940-",
+                coverImage: "https://m.media-amazon.com/images/I/91+1SUO3vUL._SL1500_.jpg", 
                 pdfUrl: "https://static.tumblr.com/jh0avtj/GIgowv0gw/it__a_coisa_-_stephen_king.pdf"
             },
             {
@@ -855,7 +941,7 @@
                 author: "L. Frank Baum",
                 genre: "Fantasia Juvenil",
                 coverImage: "https://m.media-amazon.com/images/I/81G+4+L.jpg",
-                pdfUrl: "https://example.com/placeholder-book-96.pdf"
+                pdfUrl: "#"
             },
             {
                 id: 97,
